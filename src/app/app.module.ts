@@ -10,6 +10,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms';
+import { ColorPrimaryDirective } from './shared/color-primary.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     RecipeItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    HeaderComponent
+    HeaderComponent,
+    ColorPrimaryDirective
   ],
   imports: [
     BrowserModule,
