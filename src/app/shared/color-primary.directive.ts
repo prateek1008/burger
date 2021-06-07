@@ -4,7 +4,7 @@ import { Directive, HostListener, ElementRef, OnInit, Renderer2, HostBinding } f
   selector: '[appColorPrimary]'
 })
 export class ColorPrimaryDirective implements OnInit {
-  @HostBinding('class') names = 'bg-white';
+  @HostBinding('class') names = 'text-info';
 
   constructor(private elRef: ElementRef, private renderer: Renderer2) { }
 
@@ -14,11 +14,11 @@ export class ColorPrimaryDirective implements OnInit {
   }
   
   @HostListener('mouseenter') mouseover(eventData: Event) {
-    this.names = 'bg-primary';
+    this.names = 'text-dark';
   }
 
   @HostListener('mouseleave') mouseleave(eventData: Event) {
-    this.names = 'bg-white'
+    this.names = 'text-info'
   }
 
 }

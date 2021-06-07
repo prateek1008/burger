@@ -10,7 +10,6 @@ import { Component, OnInit } from '@angular/core';
 export class ShoppingListComponent implements OnInit {
   ingredients : Ingredient[];
 
-
   constructor(private slService : shoppingListService) { }
 
   ngOnInit(): void {
@@ -20,10 +19,6 @@ export class ShoppingListComponent implements OnInit {
         this.ingredients = ingredients;
       }
     )
-  }
-
-  onAddIngredient(ingredient : Ingredient) {
-    this.ingredients.push(ingredient);
   }
 
 }
