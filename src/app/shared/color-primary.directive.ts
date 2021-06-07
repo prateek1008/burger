@@ -9,16 +9,16 @@ export class ColorPrimaryDirective implements OnInit {
   constructor(private elRef: ElementRef, private renderer: Renderer2) { }
 
   ngOnInit() {
-    this.elRef.nativeElement.className = 'text-primary'; //should be avoided 
-    this.renderer.addClass(this.elRef.nativeElement, 'bg-secondary')
+    // this.elRef.nativeElement.className = 'text-primary'; //should be avoided 
+    // this.renderer.addClass(this.elRef.nativeElement, 'bg-secondary')
   }
   
   @HostListener('mouseenter') mouseover(eventData: Event) {
-    this.names = 'bg-white';
+    this.names = 'bg-primary';
   }
 
   @HostListener('mouseleave') mouseleave(eventData: Event) {
-    this.names = 'bg-secondary'
+    this.names = 'bg-white'
   }
 
 }

@@ -1,3 +1,4 @@
+import { shoppingListService } from './shopping-list/shooping-list.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -28,7 +29,7 @@ import { ColorPrimaryDirective } from './shared/color-primary.directive';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [shoppingListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
