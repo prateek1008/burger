@@ -16,9 +16,15 @@ export class RecipeEditComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
         this.index = +params['id'];
-        this.editMode = params['id'] !== null;
+        // this.editMode = params['id'] !== null;
       }
     )
+    this.route.queryParams.subscribe(
+      (params: Params) => {
+        this.editMode = params['editMode'];
+      }
+    )
+    //const frg = this.route.snapshot.fragment; //For fragments
   }
 
 }
