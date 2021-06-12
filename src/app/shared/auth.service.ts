@@ -1,22 +1,24 @@
 export class AuthService {
-    isLoggedIn : boolean = false;
+  private isLoggedIn: boolean = false;
 
-    isAuthenticated() {
-        const promise = new Promise(
-            (resolve, reject) => {
-                setTimeout(() => {
-                    resolve(this.isLoggedIn)
-                },800)
-            }
-        )
-        return promise;
-    }
+  isAuthenticated() {
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(this.isLoggedIn);
+      }, 800);
+    });
+    return promise;
+  }
 
-    login() {
-        this.isLoggedIn = true;
-    }
+  getInfo(): boolean {
+    return this.isLoggedIn;
+  }
 
-    logout() {
-        this.isLoggedIn = false;
-    }
+  login() {
+    this.isLoggedIn = true;
+  }
+
+  logout() {
+    this.isLoggedIn = false;
+  }
 }

@@ -2,39 +2,61 @@ import { Observable } from 'rxjs';
 import { CanComponentDeactivate } from './../../shared/can-deactivate-guard.interface';
 import { shoppingListService } from './../shooping-list.service';
 import { Ingredient } from './../../shared/ingredient.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
-  styleUrls: ['./shopping-edit.component.css']
+  styleUrls: ['./shopping-edit.component.css'],
 })
-export class ShoppingEditComponent implements OnInit, CanComponentDeactivate{
-  changesSaved: boolean = false;
-  name: string = '';
-  amount: number = 0;
+export class ShoppingEditComponent implements OnInit, CanComponentDeactivate {
+  @ViewChild('f', { static: false }) form: NgForm;
+  selectedIndex: number = -1;
 
-  constructor(private slService : shoppingListService) { }
+  constructor(private slService: shoppingListService) {}
 
   ngOnInit(): void {
+    this.slService.selectedIngredientIndex.subscribe((index) => {
+      this.selectedIndex = index;
+      const selectedIngredient: Ingredient =
+        this.slService.getIngredientByIndex(index);
+      this.form.setValue({
+        name: selectedIngredient.name,
+        amount: selectedIngredient.amount,
+      });
+    });
   }
 
   onIngredientAdded() {
-
-    this.slService.addIngredient(new Ingredient(this.name,this.amount));
-    this.changesSaved = true;
+    const value = this.form.value;
+    if (this.selectedIndex === -1) {
+      this.slService.addIngredient(new Ingredient(value.name, value.amount));
+    } else {
+      this.slService.updateIngredient(this.selectedIndex, value);
+    }
+    this.onClear();
   }
 
-  onChange() {
-    this.changesSaved = false;
-  }
-
-  canDeactivate() : Observable<boolean> | Promise<boolean> | boolean {
-    if((this.name !== '' || this.amount !== 0) && !this.changesSaved ){
-      return confirm("Changes are not saved. Do you want to discard the changes?");
-    } else{
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (this.form.dirty) {
+      return confirm(
+        'Changes are not saved. Do you want to discard the changes?'
+      );
+    } else {
       return true;
     }
   }
 
+  onDelete() {
+    this.slService.deleteIngredientByIndex(this.selectedIndex);
+    this.onClear();
+  }
+
+  onClear() {
+    this.form.reset({
+      amount: 0,
+    });
+    this.selectedIndex = -1;
+  }
 }

@@ -16,9 +16,9 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { HeaderComponent } from './header/header.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ColorPrimaryDirective } from './shared/color-primary.directive';
-import { RecipeStartComponent} from './recipes/recipe-start/recipe-start.component';
+import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { ErrorComponent } from './error/error.component';
 import { AuthService } from './shared/auth.service';
 
@@ -35,14 +35,17 @@ import { AuthService } from './shared/auth.service';
     ColorPrimaryDirective,
     RecipeStartComponent,
     RecipeEditComponent,
-    ErrorComponent
+    ErrorComponent,
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule
+  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
+  providers: [
+    RecipeService,
+    shoppingListService,
+    AuthGuard,
+    AuthService,
+    CanDeactivateGuard,
+    RecipeResolver,
   ],
-  providers: [RecipeService, shoppingListService, AuthGuard, AuthService, CanDeactivateGuard, RecipeResolver],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

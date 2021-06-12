@@ -11,11 +11,13 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="dropdown">
-            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Manage Recipe <span class="caret"></span></a>
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Manage Recipe <span
+                    class="caret"></span></a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" style="cursor: pointer;" (click)="onIngredientsAdd()">To Shopping List</a>
+                <a class="dropdown-item" style="cursor: pointer;" *ngIf="isLoggedIn" (click)="onIngredientsAdd()">To
+                    Shopping List</a>
                 <a class="dropdown-item" style="cursor: pointer;" (click)="onRecipeEdit()">Edit Recipe</a>
-                <a class="dropdown-item" style="cursor: pointer;">Delete Recipe</a>
+                <a class="dropdown-item" style="cursor: pointer;" (click)="onRecipeDelete()">Delete Recipe</a>
             </div>
         </div>
     </div>
@@ -28,7 +30,8 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="list-group">
-            <div class="list-group-item" *ngFor="let ingredient of recipe.ingredients">{{ingredient.name}} ({{ingredient.amount}})</div>
+            <div class="list-group-item" *ngFor="let ingredient of recipe.ingredients">{{ingredient.name}}
+                ({{ingredient.amount}})</div>
         </div>
     </div>
 </div>

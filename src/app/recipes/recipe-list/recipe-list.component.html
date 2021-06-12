@@ -5,7 +5,13 @@
 <div class="row">
     <div class="col-sm-12">
         <ul class="list-group">
-            <app-recipe-item *ngFor="let recipeEl of recipes; let i = index" [recipe]="recipeEl" [index] = "i"></app-recipe-item>
+            <div *ngIf="recipes.length > 0; else noRecipes">
+                <app-recipe-item *ngFor="let recipeEl of recipes; let i = index" [recipe]="recipeEl" [index]="i">
+                </app-recipe-item>
+            </div>
+            <ng-template #noRecipes>
+                <h3>No Recipes Present</h3>
+            </ng-template>
         </ul>
     </div>
 </div>
