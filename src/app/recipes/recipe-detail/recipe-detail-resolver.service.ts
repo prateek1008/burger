@@ -12,6 +12,7 @@ interface IRecipe {
   name: string;
   description: string;
   imagePath: string;
+  tag: string;
   ingredients?: Ingredient[];
 }
 

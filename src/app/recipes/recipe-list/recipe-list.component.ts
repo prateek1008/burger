@@ -14,6 +14,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   recipes: Recipe[];
   activeTime: number;
   timeSubscription: Subscription;
+  filteredTag: string = '';
 
   constructor(
     private recipeService: RecipeService,

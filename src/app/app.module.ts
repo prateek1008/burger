@@ -1,3 +1,4 @@
+import { FilterPipe } from './shared/filter.pipe';
 import { RecipeService } from './recipes/recipe.service';
 import { RecipeResolver } from './recipes/recipe-detail/recipe-detail-resolver.service';
 import { CanDeactivateGuard } from './shared/can-deactivate-guard.service';
@@ -36,6 +37,7 @@ import { AuthService } from './shared/auth.service';
     RecipeStartComponent,
     RecipeEditComponent,
     ErrorComponent,
+    FilterPipe
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
   providers: [

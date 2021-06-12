@@ -48,6 +48,18 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="tag">Tag</label>
+                        <select class="form-control" id="tag" formControlName="tag">
+                            <option>veg</option>
+                            <option>nonveg</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-sm-12 d-flex justify-content-between row-hl">
                     <span class="item-hl">Ingredients</span>
                     <button class="btn btn-success item-hl" type="button" (click)="onAddIngredient()">Add</button>

@@ -21,7 +21,7 @@ export class RecipeEditComponent implements OnInit {
     private router: Router,
     private recipeService: RecipeService
   ) {
-    this.selectedRecipe = new Recipe('', '', '');
+    this.selectedRecipe = new Recipe('', '', '', '');
   }
 
   ngOnInit(): void {
@@ -29,6 +29,7 @@ export class RecipeEditComponent implements OnInit {
       this.index = +params['id'];
       if (this.index >= 0) {
         this.selectedRecipe = this.recipeService.getRecipeById(this.index);
+        console.log(this.selectedRecipe);
       }
     });
 
@@ -49,6 +50,7 @@ export class RecipeEditComponent implements OnInit {
         this.selectedRecipe.description,
         Validators.required
       ),
+      tag: new FormControl(this.selectedRecipe.tag, Validators.required),
       ingredients: this.recipeIngredients,
     });
   }

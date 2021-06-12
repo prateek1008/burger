@@ -11,12 +11,14 @@ export class RecipeService {
       'Chowmein',
       'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque provident.',
       'https://www.viniscookbook.com/wp-content/uploads/2019/02/20190214_164218.jpg',
+      'veg',
       [new Ingredient('Sauce', 2), new Ingredient('Onions', 4)]
     ),
     new Recipe(
       'Hakka Noodles',
       'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque provident.',
-      'https://www.viniscookbook.com/wp-content/uploads/2019/02/20190214_164218.jpg'
+      'https://www.viniscookbook.com/wp-content/uploads/2019/02/20190214_164218.jpg',
+      'nonveg'
     ),
   ];
   recipeUpdated = new Subject<Recipe[]>();

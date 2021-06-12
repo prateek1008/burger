@@ -2,15 +2,15 @@
     <div class="row no-gutters">
         <div class="col-sm-9">
             <h4 appColorPrimary>
-                {{ recipe.name}}
+                {{ recipe.name}} <i class="fas fa-circle h5 font-weight-bolder"
+                    [ngClass]="recipe.tag === 'veg' ? 'text-success' : 'text-danger'"></i>
             </h4>
             <p>
                 {{ recipe.description }}
             </p>
         </div>
         <div class="col-sm-3 align-self-center">
-            <img [src] = "recipe.imagePath"
-             [alt]="recipe.name" class="img-fluid" style="width: 100px;">
+            <img [src]="recipe.imagePath" [alt]="recipe.name" class="img-fluid" style="width: 100px;">
         </div>
     </div>
 </a>
