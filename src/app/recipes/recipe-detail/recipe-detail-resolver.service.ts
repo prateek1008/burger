@@ -1,20 +1,12 @@
 import { RecipeService } from './../recipe.service';
 import { Observable } from 'rxjs';
-import { Ingredient } from './../../shared/ingredient.model';
 import {
   ActivatedRouteSnapshot,
   Resolve,
   RouterStateSnapshot,
 } from '@angular/router';
 import { Injectable } from '@angular/core';
-
-interface IRecipe {
-  name: string;
-  description: string;
-  imagePath: string;
-  tag: string;
-  ingredients?: Ingredient[];
-}
+import { IRecipe } from '../recipe.interface';
 
 @Injectable()
 export class RecipeResolver implements Resolve<IRecipe> {

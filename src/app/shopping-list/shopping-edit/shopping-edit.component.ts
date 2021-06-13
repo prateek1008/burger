@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { CanComponentDeactivate } from './../../shared/can-deactivate-guard.interface';
-import { shoppingListService } from './../shooping-list.service';
+import { shoppingListService } from '../shopping-list.service';
 import { Ingredient } from './../../shared/ingredient.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';

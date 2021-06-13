@@ -1,5 +1,5 @@
 import { AuthService } from 'src/app/shared/auth.service';
-import { shoppingListService } from './shooping-list.service';
+import { shoppingListService } from './shopping-list.service';
 import { Ingredient } from './../shared/ingredient.model';
 import { Component, OnInit } from '@angular/core';
 

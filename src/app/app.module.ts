@@ -1,3 +1,6 @@
+import { RecipeListResolverService } from './recipes/recipe-list/recipe-list-resolver.service';
+import { HttpClientModule } from '@angular/common/http';
+import { DataStorageService } from './shared/data-storage.service';
 import { FilterPipe } from './shared/filter.pipe';
 import { RecipeService } from './recipes/recipe.service';
 import { RecipeResolver } from './recipes/recipe-detail/recipe-detail-resolver.service';
@@ -5,7 +8,7 @@ import { CanDeactivateGuard } from './shared/can-deactivate-guard.service';
 import { AuthGuard } from './shared/auth-guard.service';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { AppRoutingModule } from './app-routing.module';
-import { shoppingListService } from './shopping-list/shooping-list.service';
+import { shoppingListService } from './shopping-list/shopping-list.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -37,9 +40,15 @@ import { AuthService } from './shared/auth.service';
     RecipeStartComponent,
     RecipeEditComponent,
     ErrorComponent,
-    FilterPipe
+    FilterPipe,
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   providers: [
     RecipeService,
     shoppingListService,
@@ -47,6 +56,8 @@ import { AuthService } from './shared/auth.service';
     AuthService,
     CanDeactivateGuard,
     RecipeResolver,
+    DataStorageService,
+    RecipeListResolverService,
   ],
   bootstrap: [AppComponent],
 })

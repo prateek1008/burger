@@ -29,7 +29,6 @@ export class RecipeEditComponent implements OnInit {
       this.index = +params['id'];
       if (this.index >= 0) {
         this.selectedRecipe = this.recipeService.getRecipeById(this.index);
-        console.log(this.selectedRecipe);
       }
     });
 
@@ -74,7 +73,6 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.recipeForm);
     if (this.editMode === 'false') {
       this.recipeService.addRecipe(this.recipeForm.value);
     } else {
