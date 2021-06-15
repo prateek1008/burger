@@ -1,11 +1,14 @@
+import { AuthenticationInterceptor } from './shared/auth/auth-interceptor.service';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthenticationService } from './shared/auth/auth.service';
 import { RecipeListResolverService } from './recipes/recipe-list/recipe-list-resolver.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataStorageService } from './shared/data-storage.service';
 import { FilterPipe } from './shared/filter.pipe';
 import { RecipeService } from './recipes/recipe.service';
 import { RecipeResolver } from './recipes/recipe-detail/recipe-detail-resolver.service';
 import { CanDeactivateGuard } from './shared/can-deactivate-guard.service';
-import { AuthGuard } from './shared/auth-guard.service';
+import { AuthGuard } from './shared/auth/auth-guard.service';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { AppRoutingModule } from './app-routing.module';
 import { shoppingListService } from './shopping-list/shopping-list.service';
@@ -24,7 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ColorPrimaryDirective } from './shared/color-primary.directive';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { ErrorComponent } from './error/error.component';
-import { AuthService } from './shared/auth.service';
+import { AuthenticationComponent } from './authentication/authentication.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,8 @@ import { AuthService } from './shared/auth.service';
     RecipeEditComponent,
     ErrorComponent,
     FilterPipe,
+    AuthenticationComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,11 +58,16 @@ import { AuthService } from './shared/auth.service';
     RecipeService,
     shoppingListService,
     AuthGuard,
-    AuthService,
     CanDeactivateGuard,
     RecipeResolver,
     DataStorageService,
     RecipeListResolverService,
+    AuthenticationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

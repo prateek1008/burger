@@ -2,7 +2,6 @@ import { RecipeService } from './../recipe.service';
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { ActivatedRoute, Data, Params, Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -11,13 +10,11 @@ import { AuthService } from 'src/app/shared/auth.service';
 })
 export class RecipeDetailComponent implements OnInit {
   recipe: Recipe;
-  isLoggedIn: boolean;
   index: number;
   constructor(
     private recipeService: RecipeService,
     private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -27,7 +24,6 @@ export class RecipeDetailComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.index = params['id'];
     });
-    this.isLoggedIn = this.authService.getInfo();
   }
 
   onIngredientsAdd() {

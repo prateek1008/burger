@@ -1,7 +1,8 @@
-import { AuthService } from 'src/app/shared/auth.service';
+import { AuthenticationService } from './../shared/auth/auth.service';
 import { shoppingListService } from './shopping-list.service';
 import { Ingredient } from './../shared/ingredient.model';
 import { Component, OnInit } from '@angular/core';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-shopping-list',
@@ -14,11 +15,13 @@ export class ShoppingListComponent implements OnInit {
 
   constructor(
     private slService: shoppingListService,
-    private authService: AuthService
+    private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.getInfo();
+    this.authenticationService.user.pipe(take(1)).subscribe((user) => {
+      this.isLoggedIn = !!user;
+    });
     this.ingredients = this.slService.getIngredients();
     this.slService.ingredientsChanged.subscribe((ingredients: Ingredient[]) => {
       this.ingredients = ingredients;

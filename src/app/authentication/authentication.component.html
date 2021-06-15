@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-sm-4 offset-sm-4">
+        <div *ngIf="isLoading; else noLoading" class="text-center">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <ng-template #noLoading>
+            <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                {{errorMessage}}
+            </div>
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" ngModel required email>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" ngModel required
+                        minlength="6">
+                </div>
+                <button class="btn btn-primary btn-block" [disabled]="f.invalid" type="submit">{{isSignin ? 'SIGN
+                    IN' : 'SIGN UP'}}</button>
+                <div class="d-flex justify-content-center row-hl">
+                    <button class="btn btn-link item-hl" type="button" (click)="onToggle()">{{isSignin ? 'New User? Sign
+                        Up' : 'Already a User? Sign In'}}</button>
+                </div>
+
+            </form>
+        </ng-template>
+
+    </div>
+</div>

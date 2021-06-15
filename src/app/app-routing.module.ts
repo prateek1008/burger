@@ -1,3 +1,4 @@
+import { AuthenticationComponent } from './authentication/authentication.component';
 import { RecipeListResolverService } from './recipes/recipe-list/recipe-list-resolver.service';
 import { RecipeResolver } from './recipes/recipe-detail/recipe-detail-resolver.service';
 import { CanDeactivateGuard } from './shared/can-deactivate-guard.service';
@@ -10,7 +11,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './shared/auth-guard.service';
+import { AuthGuard } from './shared/auth/auth-guard.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
     path: 'recipes',
     component: RecipesComponent,
     resolve: { recipes: RecipeListResolverService },
+    canActivate: [AuthGuard],
     children: [
       { path: '', component: RecipeStartComponent },
       { path: 'new', component: RecipeEditComponent },
@@ -40,6 +42,10 @@ const appRoutes: Routes = [
         canDeactivate: [CanDeactivateGuard],
       },
     ],
+  },
+  {
+    path: 'auth',
+    component: AuthenticationComponent,
   },
   {
     path: '**',

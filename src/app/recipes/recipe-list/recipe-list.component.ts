@@ -2,7 +2,6 @@ import { RecipeService } from './../recipe.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/auth.service';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -19,8 +18,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   constructor(
     private recipeService: RecipeService,
     private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -46,14 +44,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
       relativeTo: this.route,
       queryParams: { editMode: false },
     });
-  }
-
-  onLogin() {
-    this.authService.login();
-  }
-
-  onLogout() {
-    this.authService.logout();
   }
 
   ngOnDestroy() {
