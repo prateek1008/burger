@@ -1,9 +1,16 @@
+import { PlaceholderDirective } from './../shared/placeholder.directive';
 import { IAuthResponse } from './../shared/auth/auth-response.interface';
 import { AuthenticationService } from './../shared/auth/auth.service';
 import { NgForm } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import {
+  Component,
+  ComponentFactoryResolver,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { AlertComponent } from '../shared/alert/alert.component';
 
 @Component({
   selector: 'app-authentication',
@@ -14,10 +21,14 @@ export class AuthenticationComponent implements OnInit {
   isSignin: boolean = true;
   errorMessage: string = null;
   isLoading: boolean = false;
+  modalSubscription: Subscription;
+  @ViewChild(PlaceholderDirective, { static: false })
+  errorModal: PlaceholderDirective;
 
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private componentFactoryResolver: ComponentFactoryResolver
   ) {}
 
   ngOnInit(): void {}
@@ -44,6 +55,7 @@ export class AuthenticationComponent implements OnInit {
       (error) => {
         this.isLoading = false;
         this.errorMessage = error;
+        this.onErrorModal(error);
       }
     );
 
@@ -52,5 +64,25 @@ export class AuthenticationComponent implements OnInit {
 
   onToggle() {
     this.isSignin = !this.isSignin;
+  }
+
+  private onErrorModal(errorMessage: string) {
+    const alertComponentFactory =
+      this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
+    const hostViewContainerRef = this.errorModal.viewComponentRef;
+    hostViewContainerRef.clear();
+    const componentRef = hostViewContainerRef.createComponent(
+      alertComponentFactory
+    );
+    componentRef.instance.errorMessage = errorMessage;
+
+    this.modalSubscription = componentRef.instance.isClosed.subscribe(
+      (isClosed) => {
+        if (isClosed) {
+          this.modalSubscription.unsubscribe();
+          hostViewContainerRef.clear();
+        }
+      }
+    );
   }
 }

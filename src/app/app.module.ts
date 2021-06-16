@@ -1,3 +1,4 @@
+import { PlaceholderDirective } from './shared/placeholder.directive';
 import { AuthenticationInterceptor } from './shared/auth/auth-interceptor.service';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthenticationService } from './shared/auth/auth.service';
@@ -28,6 +29,7 @@ import { ColorPrimaryDirective } from './shared/color-primary.directive';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { ErrorComponent } from './error/error.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
+import { AlertComponent } from './shared/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { AuthenticationComponent } from './authentication/authentication.compone
     FilterPipe,
     AuthenticationComponent,
     LoadingSpinnerComponent,
+    AlertComponent,
+    PlaceholderDirective,
   ],
   imports: [
     BrowserModule,
